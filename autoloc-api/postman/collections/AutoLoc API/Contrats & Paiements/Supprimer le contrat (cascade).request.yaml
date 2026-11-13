@@ -1,0 +1,12 @@
+$kind: http-request
+name: 'Supprimer le contrat (cascade)'
+order: 6000
+method: DELETE
+url: '{{baseUrl}}/api/contrats/{{contratId}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Code 204 No Content", function () {
+          pm.response.to.have.status(204);
+      });

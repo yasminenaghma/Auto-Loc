@@ -1,0 +1,3 @@
+$kind: collection
+name: AutoLoc API
+description: 'Collection de tests pour l''API AutoLoc'

@@ -1,0 +1,12 @@
+$kind: http-request
+name: 'Consulter le contrat'
+order: 2000
+method: GET
+url: '{{baseUrl}}/api/contrats/{{contratId}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Code 200 OK", function () {
+          pm.response.to.have.status(200);
+      });

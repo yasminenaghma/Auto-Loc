@@ -1,0 +1,23 @@
+$kind: http-request
+name: 'Contrat avec montant négatif (400)'
+order: 5000
+method: POST
+url: '{{baseUrl}}/api/contrats'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "dateSignature": "2026-11-13",
+      "montantTotal": -100.00,
+      "valide": true
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Code 400 Bad Request", function () {
+          pm.response.to.have.status(400);
+      });

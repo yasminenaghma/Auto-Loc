@@ -1,0 +1,12 @@
+$kind: http-request
+name: 'Lister tous les paiements'
+order: 3000
+method: GET
+url: '{{baseUrl}}/api/paiements'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Code 200 OK", function () {
+          pm.response.to.have.status(200);
+      });

@@ -1,0 +1,12 @@
+$kind: http-request
+name: 'ID avec type invalide (400)'
+order: 2000
+method: GET
+url: '{{baseUrl}}/api/contrats/abc'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Code 400 Bad Request", function () {
+          pm.response.to.have.status(400);
+      });

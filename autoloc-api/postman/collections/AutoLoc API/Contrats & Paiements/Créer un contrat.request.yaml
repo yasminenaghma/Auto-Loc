@@ -1,0 +1,28 @@
+$kind: http-request
+name: 'Créer un contrat'
+order: 1000
+method: POST
+url: '{{baseUrl}}/api/contrats'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "dateSignature": "2026-11-13",
+      "montantTotal": 1500.00,
+      "valide": true
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Code 201 Created", function () {
+          pm.response.to.have.status(201);
+      });
+
+      if (pm.response.code === 201) {
+          const response = pm.response.json();
+          pm.environment.set("contratId", response.id);
+      }

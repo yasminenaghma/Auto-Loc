@@ -1,0 +1,24 @@
+$kind: http-request
+name: 'Créer un paiement (refusé - 405)'
+order: 4000
+method: POST
+url: '{{baseUrl}}/api/paiements'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "montant": 500.00,
+      "datePaiement": "2026-11-13",
+      "modePaiement": "CARTE",
+      "contratId": 1
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Code 405 Method Not Allowed", function () {
+          pm.response.to.have.status(405);
+      });

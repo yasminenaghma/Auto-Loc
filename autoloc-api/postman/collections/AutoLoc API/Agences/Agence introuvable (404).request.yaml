@@ -1,0 +1,12 @@
+$kind: http-request
+name: 'Agence introuvable (404)'
+order: 4000
+method: GET
+url: '{{baseUrl}}/api/agences/99999'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Code 404 Not Found", function () {
+          pm.response.to.have.status(404);
+      });

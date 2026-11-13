@@ -1,0 +1,12 @@
+$kind: http-request
+name: 'Supprimer une agence'
+order: 7000
+method: DELETE
+url: '{{baseUrl}}/api/agences/{{agenceId}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Code 204 No Content", function () {
+          pm.response.to.have.status(204);
+      });

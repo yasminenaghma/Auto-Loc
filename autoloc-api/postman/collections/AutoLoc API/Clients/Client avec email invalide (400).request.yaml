@@ -1,0 +1,23 @@
+$kind: http-request
+name: 'Client avec email invalide (400)'
+order: 2000
+method: POST
+url: '{{baseUrl}}/api/clients'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "nom": "Test",
+      "prenom": "User",
+      "email": "email-invalide"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Code 400 Bad Request", function () {
+          pm.response.to.have.status(400);
+      });

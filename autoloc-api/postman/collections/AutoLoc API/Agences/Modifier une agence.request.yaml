@@ -1,0 +1,24 @@
+$kind: http-request
+name: 'Modifier une agence'
+order: 5000
+method: PUT
+url: '{{baseUrl}}/api/agences/{{agenceId}}'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "nom": "Agence Centrale Modifiée",
+      "ville": "Tunis",
+      "adresse": "Avenue Habib Bourguiba, immeuble A",
+      "telephone": "+216 71 123 457"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Code 200 OK", function () {
+          pm.response.to.have.status(200);
+      });

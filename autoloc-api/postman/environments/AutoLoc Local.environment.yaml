@@ -1,0 +1,22 @@
+name: AutoLoc Local
+values:
+  - key: baseUrl
+    value: 'http://localhost:8081'
+  - key: agenceId
+    value: ''
+  - key: employeeId
+    value: ''
+  - key: vehiculeId
+    value: ''
+  - key: equipmentId
+    value: ''
+  - key: clientId
+    value: ''
+  - key: reservationId
+    value: ''
+  - key: contratId
+    value: ''
+  - key: paiementId
+    value: ''
+  - key: maintenanceId
+    value: ''
