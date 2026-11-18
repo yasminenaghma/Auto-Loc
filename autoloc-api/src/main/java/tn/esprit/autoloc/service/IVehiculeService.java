@@ -13,4 +13,8 @@ public interface IVehiculeService {
 
     void affecterVehiculeAAgence(Long vehiculeId, Long agenceId);
     void desaffecterVehiculeDeAgence(Long vehiculeId);
+    
+    // Nouveaux services d'affectation
+    VehiculeDTO affecterVehiculeAEquipement(Long idVehicule, Long idEquipement);
+    VehiculeDTO affecterMaintenanceAvehicule(String description, String immatriculation);
 }

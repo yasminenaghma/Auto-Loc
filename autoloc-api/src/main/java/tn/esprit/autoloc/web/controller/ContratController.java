@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.autoloc.service.IContratService;
 import tn.esprit.autoloc.web.dto.ContratDTO;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -73,5 +74,21 @@ public class ContratController {
     public ResponseEntity<Void> delete(@Parameter(description = "Identifiant du contrat") @PathVariable Long id) {
         contratService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // Nouvel endpoint d'affectation
+    @PostMapping("/affecter-reservation")
+    @Operation(summary = "Créer un contrat et l'affecter à une réservation existante basée sur les dates")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Contrat créé et affecté avec succès"),
+            @ApiResponse(responseCode = "404", description = "Aucune réservation trouvée pour ces dates"),
+            @ApiResponse(responseCode = "400", description = "Dates invalides ou réservation déjà associée à un contrat")
+    })
+    public ResponseEntity<ContratDTO> affecterContratAReservation(
+            @RequestParam LocalDate dateSignature,
+            @RequestParam LocalDate dateDebut,
+            @RequestParam LocalDate dateFin) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(contratService.affecterContratAReservation(dateSignature, dateDebut, dateFin));
     }
 }

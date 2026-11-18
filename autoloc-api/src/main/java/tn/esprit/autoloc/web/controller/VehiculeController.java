@@ -56,4 +56,19 @@ public class VehiculeController {
         vehiculeService.desaffecterVehiculeDeAgence(id);
         return ResponseEntity.ok().build();
     }
+
+    // Nouveaux endpoints d'affectation
+    @PutMapping("/{idVehicule}/equipement/{idEquipement}")
+    public ResponseEntity<VehiculeDTO> affecterEquipement(
+            @PathVariable Long idVehicule,
+            @PathVariable Long idEquipement) {
+        return ResponseEntity.ok(vehiculeService.affecterVehiculeAEquipement(idVehicule, idEquipement));
+    }
+
+    @PostMapping("/maintenance")
+    public ResponseEntity<VehiculeDTO> affecterMaintenance(
+            @RequestParam String description,
+            @RequestParam String immatriculation) {
+        return ResponseEntity.ok(vehiculeService.affecterMaintenanceAvehicule(description, immatriculation));
+    }
 }
